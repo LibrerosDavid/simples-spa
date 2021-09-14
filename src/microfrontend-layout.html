@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Isomorphic Microfrontends</title>
+    <meta
+      name="importmap-type"
+      content="systemjs-importmap"
+      server-cookie
+      server-only
+    />
+    <script src="https://cdn.jsdelivr.net/npm/import-map-overrides@2.0.0/dist/import-map-overrides.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.6.1/dist/system.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.6.1/dist/extras/amd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.6.1/dist/extras/named-exports.min.js"></script>
+  </head>
+  <body>
+    <template id="single-spa-layout">
+      <single-spa-router>
+        <nav>
+          <application name="@org-name/navbar"></application>
+        </nav>
+        <main>
+          <route path="settings">
+            <application name="@org-name/settings"></application>
+          </route>
+          <route path="home">
+            <application name="@org-name/home"></application>
+          </route>
+        </main>
+      </single-spa-router>
+    </template>
+    <fragment name="importmap"></fragment>
+    <script>
+      System.import('@org-name/root-config');
+    </script>
+    <import-map-overrides-full
+      show-when-local-storage="devtools"
+      dev-libs
+    ></import-map-overrides-full>
+  </body>
+</html>
